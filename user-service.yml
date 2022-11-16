@@ -22,3 +22,10 @@ eureka:
   client:
     serviceUrl:
       defaultZone: http://${DISCOVERY_SERVER}:8761/eureka/
+
+keycloak:
+  auth-server-url: http://${KEYCLOAK_SERVER:localhost}:${KEYCLOAK_SERVER:8080}/auth
+  realm: master
+  resource: web-app
+  public-client: true
+  bearer-only: true
