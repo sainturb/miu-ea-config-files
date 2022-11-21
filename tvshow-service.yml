@@ -1,0 +1,49 @@
+server:
+  port: 8083
+spring:
+  config:
+    import: optional:configserver:http://localhost:8090
+  application:
+    name: tvshow-service
+  # Database
+  datasource:
+    driver-class-name: org.postgresql.Driver
+    url: jdbc:postgresql://localhost:55001/tvshow-service
+    username: postgres
+    password: postgrespw
+  # JPA properties
+  jpa:
+    properties:
+      hibernate:
+        dialect: org.hibernate.dialect.PostgreSQLDialect
+    hibernate:
+      ddl-auto: create-drop
+    defer-datasource-initialization: true
+    show-sql: true
+    database: postgresql
+    # database-platform: org.hibernate.dialect.PostgreSQLDialect
+    # open-in-view: false
+    # generate-ddl: true
+  sql:
+    init:
+      mode: always
+  zipkin:
+    base-url: http://${ZIPKIN_SERVER}:9411
+eureka:
+  client:
+    serviceUrl:
+      defaultZone: http://${DISCOVERY_SERVER}:8761/eureka/
+keycloak:
+  auth-server-url: http://${KEYCLOAK_SERVER:localhost}:${KEYCLOAK_PORT:8080}/auth
+  realm: master
+  resource: web-app
+  public-client: true
+  bearer-only: true
+management:
+  endpoints:
+    web:
+      exposure:
+        include: "*"
+  endpoint:
+    health:
+      show-details: always
