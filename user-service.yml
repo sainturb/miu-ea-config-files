@@ -26,42 +26,7 @@ eureka:
 keycloak:
   enabled: true
   realm: spring-realm
-  auth-server-url: http://${KEYCLOAK_spring:
-  datasource:
-    url: jdbc:postgresql://${DATABASE_HOST}:5432/postgres
-    username: postgres
-    password: postgres
-  jpa:
-    properties:
-      hibernate:
-        dialect: org.hibernate.dialect.PostgreSQLDialect
-        format_sql: true
-        show_sql: true
-    hibernate:
-      ddl-auto: create
-    defer-datasource-initialization: true
-  sql:
-    init:
-      mode: always
-  zipkin:
-    base-url: http://${ZIPKIN_SERVER}:9411
-
-eureka:
-  client:
-    serviceUrl:
-      defaultZone: http://${DISCOVERY_SERVER}:8761/eureka/
-
-keycloak:
-  enabled: true
-  realm: spring-realm
   auth-server-url: http://${KEYCLOAK_SERVER:localhost}:8080/auth
-  public-client: true
-  bearer-only: true
-  credentials:
-    secret: bbc02d7c-d18e-4fb7-8882-23165e849810
-  ssl-required: none
-  resource: web-app
-  use-resource-role-mappings: trueSERVER:localhost}:8080/auth
   public-client: true
   bearer-only: true
   credentials:
