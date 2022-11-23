@@ -17,6 +17,11 @@ spring:
       mode: always
   zipkin:
     base-url: http://${ZIPKIN_SERVER}:9411
+  rabbitmq:
+    host: localhost
+    port: 5672
+    username: guest
+    password: guest
 
 eureka:
   client:
