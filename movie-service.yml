@@ -1,49 +1,36 @@
-server:
-  port: 8082
 spring:
-  config:
-    import: optional:configserver:http://localhost:8090
-  application:
-    name: movie-service
-  # Database
   datasource:
-    driver-class-name: org.postgresql.Driver
-    url: jdbc:postgresql://${DATABASE_HOST}:55000/movie-service
+    url: jdbc:postgresql://${DATABASE_HOST}:5432/postgres
     username: postgres
-    password: postgrespw
-  # JPA properties
+    password: postgres
   jpa:
     properties:
       hibernate:
         dialect: org.hibernate.dialect.PostgreSQLDialect
+        format_sql: true
+        show_sql: true
     hibernate:
-      ddl-auto: create-drop
+      ddl-auto: create
     defer-datasource-initialization: true
-    show-sql: true
-    database: postgresql
-    # database-platform: org.hibernate.dialect.PostgreSQLDialect
-    # open-in-view: false
-    # generate-ddl: true
   sql:
     init:
       mode: always
   zipkin:
     base-url: http://${ZIPKIN_SERVER}:9411
+
 eureka:
   client:
     serviceUrl:
       defaultZone: http://${DISCOVERY_SERVER}:8761/eureka/
+
 keycloak:
-  auth-server-url: http://${KEYCLOAK_SERVER:localhost}:${KEYCLOAK_PORT:8080}/auth
-  realm: master
-  resource: web-app
+  enabled: true
+  realm: spring-realm
+  auth-server-url: http://${KEYCLOAK_SERVER:localhost}:8080/auth
   public-client: true
   bearer-only: true
-management:
-  endpoints:
-    web:
-      exposure:
-        include: "*"
-  endpoint:
-    health:
-      show-details: always
+  credentials:
+    secret: bbc02d7c-d18e-4fb7-8882-23165e849810
+  ssl-required: none
+  resource: web-app
+  use-resource-role-mappings: true
