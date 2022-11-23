@@ -1,0 +1,31 @@
+spring:
+  datasource:
+    url: jdbc:postgresql://${DATABASE_HOST}:5432/postgres
+    username: postgres
+    password: postgres
+  jpa:
+    properties:
+      hibernate:
+        dialect: org.hibernate.dialect.PostgreSQLDialect
+        format_sql: true
+        show_sql: true
+    hibernate:
+      ddl-auto: create
+    defer-datasource-initialization: true
+  sql:
+    init:
+      mode: always
+  zipkin:
+    base-url: http://${ZIPKIN_SERVER}:9411
+
+eureka:
+  client:
+    serviceUrl:
+      defaultZone: http://${DISCOVERY_SERVER}:8761/eureka/
+
+keycloak:
+  auth-server-url: http://${KEYCLOAK_SERVER:localhost}:${KEYCLOAK_PORT:8080}/auth
+  realm: master
+  resource: web-app
+  public-client: true
+  bearer-only: true
