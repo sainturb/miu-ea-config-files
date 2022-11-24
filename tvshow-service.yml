@@ -21,7 +21,12 @@ spring:
     bootstrap-servers: ${KAFKA_SERVERS:localhost:9092}    
     consumer:      
       group-id: group-1
-      auto-offset-reset: latest   
+      auto-offset-reset: latest
+  rabbitmq:
+    host: rabbitmq
+    port: 5672
+    username: guest
+    password: guest
 
 eureka:
   client:
