@@ -16,7 +16,12 @@ spring:
     init:
       mode: always
   zipkin:
-    base-url: http://${ZIPKIN_SERVER}:9411
+    base-url: http://${ZIPKIN_SERVER:localhost}:9411
+  kafka:
+    bootstrap-servers: ${KAFKA_SERVERS:localhost:9092}    
+    consumer:      
+      group-id: group-1
+      auto-offset-reset: latest   
 
 eureka:
   client:
